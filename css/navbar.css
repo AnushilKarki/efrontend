@@ -1,0 +1,256 @@
+@import url('https://fonts.googleapis.com/css2?family=Itim&display=swap');
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.nav-container{
+    padding-bottom: 20px;
+}
+.menu{
+    background: rgb(49, 49, 172);
+    position: fixed;
+    width: 100%;
+    z-index: 2000;
+}
+.menu nav{
+    position: relative;
+    display: flex;
+    max-width: calc(100% - 200px);
+    margin: 0 auto;
+    height: 70px;
+    align-items: center;
+    justify-content: space-between;
+}
+nav .menu-items{
+    display: flex;
+}
+nav .menu-items .menu-links{
+    margin-left: 80px;
+    display: flex;
+}
+.menu-items .logo a{
+    color: #f2f2f2;
+    font-size: 30px;
+    font-weight: 600;
+}
+.menu-items .logo{
+    padding-top: 15px;
+}
+.menu-items .menu-links li{
+    list-style-type: none;
+    line-height: 70px;
+}
+.menu-items .menu-links li a,
+.menu-items .menu-links li label{
+    color: #f2f2f2;
+    font-size: 18px;
+    font-weight: 500;
+    padding: 9px 17px;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+.menu-items .menu-links li label{
+    display: none;
+}
+.menu-items .menu-links li a:hover,
+.menu-items .menu-links li label:hover{
+    background: rgb(49, 49, 172);
+}
+.menu .menu-search,
+.menu .menu-icon {
+    color: #f2f2f2;
+    cursor: pointer;
+    font-size: 20px;
+    line-height: 70px;
+    width: 70px;
+    text-align: center;
+}
+.menu .menu-icon{
+    display: none;
+}
+.menu #show-search:checked ~ .menu-search i::before{
+content: "\f00d";
+}
+.menu .search-box{
+    position: absolute;
+    height: 100%;
+    max-width: calc(100% - 50px);
+    width: 100%;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s ease;
+}
+.menu #show-search:checked ~ .search-box{
+    opacity: 2;
+    pointer-events: auto;
+}
+.search-box input{
+    width: 100%;
+    height: 100%;
+    border: none;
+    outline: none;
+    font-size: 17px;
+    color: #f2f2f2;
+    background: rgb(49, 49, 172);
+    padding: 0 100px 0 15px;
+}
+.search-box input::placeholder{
+    color: #f2f2f2;
+}
+.search-box .go-icon{
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    cursor: pointer;
+    line-height: 60px;
+    transform: translateY(-50%);
+    width: 70px;
+    background: rgb(49, 49, 172);
+    color: #f2f2f2;
+    border: none;
+    outline: none;
+    font-size: 20px;
+}
+.menu input[type="checkbox"] {
+    display: none;
+}
+
+.menu-items .menu-links ul{
+    position: absolute;
+    top: 80px;
+    background: rgb(49, 49, 172);
+    z-index: -1;
+    opacity: 0;
+    visibility: hidden;
+}
+.menu-items .menu-links li:hover > ul{
+    top:70px;
+    opacity: 1;
+    visibility: visible;
+    transition: all 0.3s ease;
+}
+.menu-items .menu-links ul li a{
+    display: block;
+    width: 100%;
+    line-height: 30px;
+    border: 0px !important;
+}
+.menu-items .menu-links ul ul{
+    position: absolute;
+    top: 0;
+    right: calc(-100% + 8px);
+}
+.menu-items .menu-links ul li{
+    position: relative;
+}
+.menu-items .menu-links ul li:hover ul {
+    top: 0;
+}
+
+@media screen and (max-width:1250px) {
+    .menu nav{
+        max-width: 100%;
+        padding: 0 20px;
+    }
+    nav .menu-items .menu-links {
+        margin-left: 30px;
+    }
+    .menu .menu-links li a{
+        padding: 8px 13px;
+    }
+    .menu .search-box{
+        max-width: calc(100% - 100px);
+    }
+    .menu .search-box input{
+        padding: 0 100px 0 15px;
+    }
+}
+
+
+@media screen and (max-width:900px) {
+    .menu .menu-icon{
+        display: block;
+    }
+    .menu-items .logo{
+        padding: 10px;
+    }
+    .menu #show-menu:checked ~ .menu-icon i::before{
+        content: "\f00d";
+    }
+    nav .menu-items .menu-links{
+        display: block;
+        position: fixed;
+        background: rgb(49, 49, 172);
+        height: 100%;
+        width: 100%;
+        top: 70px;
+        left: -100%;
+        margin-left: 0;
+        max-width: 350px;
+        overflow-y: auto;
+        padding-bottom: 100px;
+        transition: all 0.2s ease;
+    }
+    nav #show-menu:checked ~ .menu-items .menu-links{
+        left: 0%;
+    }
+    .menu-items .menu-links li{
+        margin: 15px 20px;
+    }
+    .menu-items .menu-links li a,
+    .menu-items .menu-links li label{
+        line-height: 40px;
+        font-size: 20px;
+        display: block;
+        padding: 8px 18px;
+        cursor: pointer;
+    }
+    .menu-items .menu-links li a.desktop-links{
+        display: none;
+    }
+    .menu-items .menu-links ul,
+    .menu-items .menu-links ul ul{
+        position: static;
+        opacity: 1;
+        visibility: visible;
+        background: none;
+        max-height: 0px;
+        overflow: hidden;
+    }
+    .menu-items .menu-links #show-features:checked ~  ul,
+    .menu-items .menu-links #show-products:checked ~  ul,
+    .menu-items .menu-links #show-mens:checked ~  ul{
+        max-height: 100vh;
+    }
+    .menu-items .menu-links ul li{
+        margin: 7px 20px;
+    }
+    .menu-items .menu-links ul li a {
+        font-size: 18px;
+        line-height: 30px;
+        border-radius: 5px !important;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .menu nav{
+        padding: 0 10px;
+    }
+    .menu-items .logo a{
+        font-size: 20px;
+    }
+    .menu .search-box {
+        max-width: calc(100% - 70px);
+    }
+    .menu .search-box .go-icon{
+        width: 30px;
+        right: 0;
+    }
+    .menu .search-box input{
+        padding-right: 30px;
+    }
+}

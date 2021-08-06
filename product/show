@@ -1,0 +1,148 @@
+
+
+  <!-- Product Details -->@foreach($products as $product)
+  @php
+                                        $photo = App\Models\Product::where('id', $product->id)->value('image');
+                                        $colors= App\Models\Stock::where('product_id',$product->id)->get();
+                                    @endphp
+  <section class="section product-detail">
+    <div class="details container-md">
+      <div class="left">
+        <div class="big-image">
+            <div class="main">
+          <img src="{{asset('storage/'.$product->image)}}" alt="">
+</div>
+        </div>
+        <div class="thumbnails">
+       
+     @foreach($colors as $stock)
+          <div class="small-image">
+              <div class="thumbnail">
+            <img src="{{asset('storage/'.$stock->images)}}" alt="">
+</div>
+          </div>
+         @endforeach
+        </div>
+      </div>
+      <div class="right">
+    
+        <h1>{{ $product->name }}</h1>
+        <div class="price">Rs {{ $product->selling_price }}</div>
+        <form action="{{route('cart.add', $product->id)}}">
+        @csrf
+      
+          
+          <div>
+            <select name="size">
+              <option value="Select Size" selected disabled>Select Size</option>
+              @foreach($colors as $color)
+              <option value="{{ $color->size }}">{{ $color->size }}</option>
+       
+              @endforeach
+             
+            </select>
+            <br><br>
+            <select name="color">
+              <option value="Select color" selected disabled>Select Color</option>
+              @foreach($colors as $color)
+              <option value="{{ $color->color }}">{{ $color->color }}</option>
+       
+              @endforeach
+             
+            </select>
+           <br><br>
+            <span><i class='bx bx-chevron-down'></i></span>
+            <input name="quan" type="number" value="">
+         <br><br>
+         <input type="submit" class="addCart"value="Add to cart">
+          </div>
+   
+        </form>
+
+        <form class="form">
+
+         
+        
+        </form>
+        <h3>Product Details</h3>
+        <p>{{ $product->description }}</p>
+      </div>
+    </div>
+  </section>
+@endforeach
+
+
+
+<div id="content-wrapper">
+@foreach($products as $product)
+  @php
+                                        $photo = App\Models\Product::where('id', $product->id)->value('image');
+                                        $colors= App\Models\Stock::where('product_id',$product->id)->get();
+                                    @endphp
+
+		<div class="column">
+			<img id=featured src="{{asset('storage/'.$product->image)}}">
+
+			<div id="slide-wrapper" >
+			
+
+				<div id="slider">
+          @foreach($colors as $color)
+					
+          
+					<img class="thumbnail" src="{{asset('storage/'.$color->images)}}">
+          @endforeach
+				</div>
+
+			
+			</div>
+		</div>
+
+		<div class="column">
+    <div class="right">
+    
+    <h1>{{ $product->name }}</h1>
+    <div class="price">Rs {{ $product->selling_price }}</div>
+    <form action="{{route('cart.add', $product->id)}}">
+    @csrf
+  
+      
+      <div>
+        <select name="size">
+          <option value="Select Size" selected disabled>Select Size</option>
+          @foreach($colors as $color)
+          <option value="{{ $color->size }}">{{ $color->size }}</option>
+   
+          @endforeach
+         
+        </select>
+        <br><br>
+        <select name="color">
+          <option value="Select color" selected disabled>Select Color</option>
+          @foreach($colors as $color)
+          <option value="{{ $color->color }}">{{ $color->color }}</option>
+   
+          @endforeach
+         
+        </select>
+       <br><br>
+        <span><i class='bx bx-chevron-down'></i></span>
+        <input name="quan" type="number" value="">
+     <br><br>
+     <input type="submit" class="addCart"value="Add to cart">
+      </div>
+
+    </form>
+
+    <form class="form">
+
+     
+    
+    </form>
+    <h3>Product Details</h3>
+    <p>{{ $product->description }}</p>
+  </div>
+</div>
+		</div>
+@endforeach
+</div>
